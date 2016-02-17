@@ -4,20 +4,18 @@ const {
   Paper
 } = mui;
 
-SignUp = React.createClass({
+LogIn = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
+
   _handleSubmit(event) {
     event.preventDefault();
 
     let userName = this.refs.userName.getValue();
     let password = this.refs.password.getValue();
-    //accounts api
-    Accounts.createUser({
-      username: userName,
-      password: password,
-    }, (error) => {
+
+    Meteor.loginWithPassword({username: userName}, password, (error) => {
       if (error) {
         console.log(error);
         return;
@@ -25,7 +23,6 @@ SignUp = React.createClass({
       this.context.router.push('/account');
     });
   },
-
   getStyles() {
     return {
       textField: {
@@ -40,8 +37,8 @@ SignUp = React.createClass({
         fontSize: '20px'
       },
       button: {
-        height: '50px',
         width: '200px',
+        height: '50px',
         marginTop: '50px',
         marginBottom: '15px'
       }
@@ -51,10 +48,9 @@ SignUp = React.createClass({
   render() {
     let styles = this.getStyles();
     return (
-      <div className="signup">
+      <div className="login">
       <Paper zDepth={2} className="paper">
         <form onSubmit={ this._handleSubmit }>
-
           <TextField
             ref="userName"
             style={styles.textField}
@@ -72,7 +68,7 @@ SignUp = React.createClass({
             style={styles.button}
             labelStyle={styles.label}
             type="submit"
-            label="注册"
+            label="登录"
             primary={true} />
         </form>
       </Paper>
