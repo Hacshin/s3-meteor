@@ -22,7 +22,7 @@ NavBar = React.createClass({
 	      });
 	},
 	_handleTabsChange(value) {
-		this.context.router.push(value)
+		this.context.router.push(value);
 		this.setState({tabIndex: this._getSelectedIndex()});
 	},
 
@@ -30,6 +30,7 @@ _getSelectedIndex() {
      return this.context.router.isActive('/home') ? '/home' :
        this.context.router.isActive('/signup') ? '/signup' :
        this.context.router.isActive('/account') ? '/account' :
+       this.context.router.isActive('/chat') ? '/chat' :
        this.context.router.isActive('/login') ? '/login' : '';
    },
 
@@ -77,8 +78,8 @@ _getSelectedIndex() {
 						value={ currentUser ? '/account' : '/signup' }
 						style={style.tab} />
 					<Tab 
-						label='log in'
-						value='/login'
+						label={ currentUser ? 'chat' : 'login' }
+						value={ currentUser ? '/chat' : '/login' }
 						style={style.tab} />
 				</Tabs>
 				{ logOutMenu }
