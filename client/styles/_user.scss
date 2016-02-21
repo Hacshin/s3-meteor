@@ -1,5 +1,6 @@
 .signup, .login{
   flex-grow: 1;
+  overflow-y: scroll;
   .paper {
     max-width: 600px;
     margin: 50px auto;
